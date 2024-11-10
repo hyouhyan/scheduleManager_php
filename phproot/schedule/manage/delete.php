@@ -10,7 +10,7 @@ if (!isset($_SESSION['user_id'])) {
 
 // IDがGETリクエストに存在しない場合、スケジュールページにリダイレクト
 if (!isset($_GET['id'])) {
-    header('Location: schedule.php');
+    header('Location: /schedule/index.php');
     exit;
 }
 
@@ -24,7 +24,7 @@ $stmt->bindParam(':id', $schedule_id, PDO::PARAM_INT);
 // 削除を実行
 if ($stmt->execute()) {
     // 削除が成功した場合、スケジュールページにリダイレクト
-    header('Location: schedule.php?message=deleted');
+    header('Location: /schedule/index.php?message=deleted');
     exit;
 } else {
     // エラーが発生した場合、エラーメッセージを表示

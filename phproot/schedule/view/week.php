@@ -63,7 +63,7 @@ $days_of_week = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturd
             </div>
         <?php endforeach; ?>
     </div>
-    <a href="schedule.php" class="btn btn-secondary mt-3">Back to Schedules</a>
+    <a href="/schedule/index.php" class="btn btn-secondary mt-3">Back to Schedules</a>
 </div>
 </body>
 </html>

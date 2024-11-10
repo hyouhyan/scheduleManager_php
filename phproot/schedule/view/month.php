@@ -107,7 +107,7 @@ $total_days = date('t', strtotime($first_day));
         </tr>
         </tbody>
     </table>
-    <a href="schedule.php" class="btn btn-secondary">Back to Schedules</a>
+    <a href="/schedule/index.php" class="btn btn-secondary">Back to Schedules</a>
 </div>
 </body>
 </html>

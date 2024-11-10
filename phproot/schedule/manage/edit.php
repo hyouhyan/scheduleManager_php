@@ -10,7 +10,7 @@ if (!isset($_SESSION['user_id'])) {
 
 // GETリクエストにスケジュールIDがない場合、スケジュール一覧ページにリダイレクト
 if (!isset($_GET['id'])) {
-    header('Location: schedule.php');
+    header('Location: /schedule/index.php');
     exit;
 }
 
@@ -44,7 +44,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     ]);
 
     // 更新後、スケジュール一覧ページにリダイレクト
-    header('Location: schedule.php?message=updated');
+    header('Location: /schedule/index.php?message=updated');
     exit;
 }
 ?>
@@ -76,7 +76,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             <textarea name="content" class="form-control" rows="3" required><?= htmlspecialchars($schedule['content']) ?></textarea>
         </div>
         <button type="submit" class="btn btn-primary">Update</button>
-        <a href="schedule.php" class="btn btn-secondary">Cancel</a>
+        <a href="/schedule/index.php" class="btn btn-secondary">Cancel</a>
     </form>
 </div>
 </body>

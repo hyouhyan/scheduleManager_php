@@ -25,7 +25,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     ]);
 
     // 作成後、スケジュール一覧ページにリダイレクト
-    header('Location: schedule.php?message=created');
+    header('Location: /schedule/index.php?message=created');
     exit;
 }
 ?>
@@ -57,7 +57,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             <textarea name="content" class="form-control" rows="3" required></textarea>
         </div>
         <button type="submit" class="btn btn-primary">Create</button>
-        <a href="schedule.php" class="btn btn-secondary">Cancel</a>
+        <a href="/schedule/index.php" class="btn btn-secondary">Cancel</a>
     </form>
 </div>
 </body>
