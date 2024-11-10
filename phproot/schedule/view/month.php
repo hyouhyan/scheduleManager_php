@@ -1,10 +1,10 @@
 <?php
 session_start();
-require 'db.php';
+require $_SERVER['DOCUMENT_ROOT'].'/config/db.php';
 
 // ユーザーがログインしていない場合、ログインページにリダイレクト
 if (!isset($_SESSION['user_id'])) {
-    header('Location: login.php');
+    header('Location: /auth/login.php');
     exit;
 }
 
@@ -55,8 +55,8 @@ $total_days = date('t', strtotime($first_day));
 <div class="container mt-5">
     <h2>Monthly Schedule for <?= date('F Y', strtotime($first_day)) ?></h2>
     <div class="d-flex justify-content-between mb-3">
-        <a href="schedule_month.php?year=<?= $year ?>&month=<?= $month - 1 ?>" class="btn btn-outline-secondary">&lt; Previous</a>
-        <a href="schedule_month.php?year=<?= $year ?>&month=<?= $month + 1 ?>" class="btn btn-outline-secondary">Next &gt;</a>
+        <a href="?year=<?= $year ?>&month=<?= $month - 1 ?>" class="btn btn-outline-secondary">&lt; Previous</a>
+        <a href="?year=<?= $year ?>&month=<?= $month + 1 ?>" class="btn btn-outline-secondary">Next &gt;</a>
     </div>
     <table class="table table-bordered calendar">
         <thead>
@@ -107,7 +107,7 @@ $total_days = date('t', strtotime($first_day));
         </tr>
         </tbody>
     </table>
-    <a href="schedule.php" class="btn btn-secondary">Back to Schedules</a>
+    <a href="/schedule/index.php" class="btn btn-secondary">Back to Schedules</a>
 </div>
 </body>
 </html>

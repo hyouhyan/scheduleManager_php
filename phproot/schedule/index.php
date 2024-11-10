@@ -1,9 +1,9 @@
 <?php
 session_start();
-require 'db.php';
+require $_SERVER['DOCUMENT_ROOT'].'/config/db.php';
 
 if (!isset($_SESSION['user_id'])) {
-    header('Location: login.php');
+    header('Location: /auth/login.php');
     exit;
 }
 
@@ -20,7 +20,7 @@ $schedules = $stmt->fetchAll();
 <body>
 <div class="container mt-5">
     <div class="d-flex justify-content-end">
-        <a href="logout.php" class="btn btn-danger">Logout</a>
+        <a href="/auth/logout.php" class="btn btn-danger">Logout</a>
     </div>
 
     <h2>Your Schedules</h2>
@@ -37,11 +37,11 @@ $schedules = $stmt->fetchAll();
     <div class="alert alert-success">Schedule created successfully.</div>
     <?php endif; ?>
 
-    <a href="schedule_create.php" class="btn btn-success mb-3">Add New Schedule</a>
+    <a href="/schedule/manage/create.php" class="btn btn-success mb-3">Add New Schedule</a>
 
     <div class="mb-3">
-        <a href="schedule_month.php" class="btn btn-info mr-1">View Monthly Schedule</a>
-        <a href="schedule_week.php" class="btn btn-info mr-1">View Weekly Schedule</a>
+        <a href="/schedule/view/month.php" class="btn btn-info mr-1">View Monthly Schedule</a>
+        <a href="/schedule/view/week.php" class="btn btn-info mr-1">View Weekly Schedule</a>
     </div>
 
     <table class="table table-bordered">
@@ -62,8 +62,8 @@ $schedules = $stmt->fetchAll();
                 <td><?= htmlspecialchars($schedule['place']) ?></td>
                 <td><?= htmlspecialchars($schedule['content']) ?></td>
                 <td>
-                    <a href="schedule_edit.php?id=<?= $schedule['id'] ?>" class="btn btn-warning btn-sm">Edit</a>
-                    <a href="schedule_delete.php?id=<?= $schedule['id'] ?>" class="btn btn-danger btn-sm">Delete</a>
+                    <a href="/schedule/manage/edit.php?id=<?= $schedule['id'] ?>" class="btn btn-warning btn-sm">Edit</a>
+                    <a href="/schedule/manage/delete.php?id=<?= $schedule['id'] ?>" class="btn btn-danger btn-sm">Delete</a>
                 </td>
             </tr>
         <?php endforeach; ?>

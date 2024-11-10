@@ -1,10 +1,10 @@
 <?php
 session_start();
-require 'db.php';
+require $_SERVER['DOCUMENT_ROOT'].'/config/db.php';
 
 // ユーザーがログインしていない場合、ログインページにリダイレクト
 if (!isset($_SESSION['user_id'])) {
-    header('Location: login.php');
+    header('Location: /auth/login.php');
     exit;
 }
 
@@ -35,8 +35,8 @@ $days_of_week = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturd
 <div class="container mt-5">
     <h2>Weekly Schedule for Week <?= $week ?>, <?= $year ?></h2>
     <div class="d-flex justify-content-between mb-3">
-        <a href="schedule_week.php?year=<?= $year ?>&week=<?= $week - 1 ?>" class="btn btn-outline-secondary">&lt; Previous Week</a>
-        <a href="schedule_week.php?year=<?= $year ?>&week=<?= $week + 1 ?>" class="btn btn-outline-secondary">Next Week &gt;</a>
+        <a href="?year=<?= $year ?>&week=<?= $week - 1 ?>" class="btn btn-outline-secondary">&lt; Previous Week</a>
+        <a href="?year=<?= $year ?>&week=<?= $week + 1 ?>" class="btn btn-outline-secondary">Next Week &gt;</a>
     </div>
 
     <div class="list-group">
@@ -63,7 +63,7 @@ $days_of_week = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturd
             </div>
         <?php endforeach; ?>
     </div>
-    <a href="schedule.php" class="btn btn-secondary mt-3">Back to Schedules</a>
+    <a href="/schedule/index.php" class="btn btn-secondary mt-3">Back to Schedules</a>
 </div>
 </body>
 </html>

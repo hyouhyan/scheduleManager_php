@@ -1,6 +1,6 @@
 <?php
 session_start();
-require 'db.php';
+require $_SERVER['DOCUMENT_ROOT'].'/config/db.php';
 
 
 
@@ -10,7 +10,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     if ($username === $login_user && $password === $login_pass) {
         $_SESSION['user_id'] = $username;
-        header('Location: schedule.php');
+        header('Location: /schedule/index.php');
         exit;
     } else {
         $error = "Invalid credentials";
