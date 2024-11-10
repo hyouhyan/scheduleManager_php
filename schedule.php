@@ -29,6 +29,10 @@ $schedules = $stmt->fetchAll();
     <div class="alert alert-success">Schedule updated successfully.</div>
     <?php endif; ?>
 
+    <?php if (isset($_GET['message']) && $_GET['message'] === 'created'): ?>
+    <div class="alert alert-success">Schedule created successfully.</div>
+    <?php endif; ?>
+
     <a href="schedule_create.php" class="btn btn-success mb-3">Add New Schedule</a>
     <table class="table table-bordered">
         <thead>
