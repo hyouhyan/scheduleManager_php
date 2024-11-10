@@ -12,9 +12,20 @@ if (!isset($_SESSION['user_id'])) {
 $year = isset($_GET['year']) ? (int)$_GET['year'] : date('Y');
 $week = isset($_GET['week']) ? (int)$_GET['week'] : date('W');
 
+// 週のオーバーフローを調整
+if ($week < 1) {
+    $year--;
+    $week = 52;
+    header("Location: ?year=$year&week=$week");
+} elseif ($week > 52) {
+    $year++;
+    $week = 1;
+    header("Location: ?year=$year&week=$week");
+}
+
 // 週の開始日と終了日を計算
-$start_of_week = date('Y-m-d', strtotime("$year-W$week-1"));
-$end_of_week = date('Y-m-d', strtotime("$year-W$week-7"));
+$start_of_week = date('Y-m-d', strtotime("{$year}-W" . str_pad($week, 2, '0', STR_PAD_LEFT) . "-1"));
+$end_of_week = date('Y-m-d', strtotime("{$year}-W" . str_pad($week, 2, '0', STR_PAD_LEFT) . "-7"));
 
 // スケジュールを取得
 $stmt = $pdo->prepare("SELECT * FROM schedules WHERE DATE(begin) BETWEEN :start_of_week AND :end_of_week ORDER BY begin ASC");
