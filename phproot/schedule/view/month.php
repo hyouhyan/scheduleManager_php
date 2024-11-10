@@ -1,6 +1,6 @@
 <?php
 session_start();
-require '/config/db.php';
+require $_SERVER['DOCUMENT_ROOT'].'/config/db.php';
 
 // ユーザーがログインしていない場合、ログインページにリダイレクト
 if (!isset($_SESSION['user_id'])) {

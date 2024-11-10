@@ -1,6 +1,6 @@
 <?php
 session_start();
-require '/config/db.php';
+require $_SERVER['DOCUMENT_ROOT'].'/config/db.php';
 
 if (!isset($_SESSION['user_id'])) {
     header('Location: /auth/login.php');
