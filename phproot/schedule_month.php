@@ -1,10 +1,10 @@
 <?php
 session_start();
-require 'db.php';
+require '/config/db.php';
 
 // ユーザーがログインしていない場合、ログインページにリダイレクト
 if (!isset($_SESSION['user_id'])) {
-    header('Location: login.php');
+    header('Location: /auth/login.php');
     exit;
 }
 

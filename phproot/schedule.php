@@ -1,9 +1,9 @@
 <?php
 session_start();
-require 'db.php';
+require '/config/db.php';
 
 if (!isset($_SESSION['user_id'])) {
-    header('Location: login.php');
+    header('Location: /auth/login.php');
     exit;
 }
 
@@ -20,7 +20,7 @@ $schedules = $stmt->fetchAll();
 <body>
 <div class="container mt-5">
     <div class="d-flex justify-content-end">
-        <a href="logout.php" class="btn btn-danger">Logout</a>
+        <a href="/auth/logout.php" class="btn btn-danger">Logout</a>
     </div>
 
     <h2>Your Schedules</h2>
