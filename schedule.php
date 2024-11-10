@@ -20,6 +20,11 @@ $schedules = $stmt->fetchAll();
 <body>
 <div class="container mt-5">
     <h2>Your Schedules</h2>
+
+    <?php if (isset($_GET['message']) && $_GET['message'] === 'deleted'): ?>
+    <div class="alert alert-success">Schedule deleted successfully.</div>
+    <?php endif; ?>
+
     <a href="schedule_create.php" class="btn btn-success mb-3">Add New Schedule</a>
     <table class="table table-bordered">
         <thead>
