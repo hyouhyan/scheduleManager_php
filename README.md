@@ -1,0 +1,2 @@
+# scheduleManager_php
+phpとMySQLによるタスク管理アプリ
