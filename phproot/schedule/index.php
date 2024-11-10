@@ -47,20 +47,20 @@ $schedules = $stmt->fetchAll();
     <table class="table table-bordered">
         <thead>
         <tr>
+            <th>Content</th>
+            <th>Place</th>
             <th>Begin</th>
             <th>End</th>
-            <th>Place</th>
-            <th>Content</th>
             <th>Actions</th>
         </tr>
         </thead>
         <tbody>
         <?php foreach ($schedules as $schedule): ?>
             <tr>
+                <td><?= htmlspecialchars($schedule['content']) ?></td>
+                <td><?= htmlspecialchars($schedule['place']) ?></td>
                 <td><?= htmlspecialchars($schedule['begin']) ?></td>
                 <td><?= htmlspecialchars($schedule['end']) ?></td>
-                <td><?= htmlspecialchars($schedule['place']) ?></td>
-                <td><?= htmlspecialchars($schedule['content']) ?></td>
                 <td>
                     <a href="/schedule/manage/edit.php?id=<?= $schedule['id'] ?>" class="btn btn-warning btn-sm">Edit</a>
                     <a href="/schedule/manage/delete.php?id=<?= $schedule['id'] ?>" class="btn btn-danger btn-sm">Delete</a>

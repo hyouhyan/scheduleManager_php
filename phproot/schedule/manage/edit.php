@@ -60,20 +60,20 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <h2>Edit Schedule</h2>
     <form method="POST">
         <div class="mb-3">
-            <label for="begin" class="form-label">Begin</label>
-            <input type="datetime-local" name="begin" class="form-control" value="<?= htmlspecialchars(date('Y-m-d\TH:i', strtotime($schedule['begin']))) ?>" required>
-        </div>
-        <div class="mb-3">
-            <label for="end" class="form-label">End</label>
-            <input type="datetime-local" name="end" class="form-control" value="<?= htmlspecialchars(date('Y-m-d\TH:i', strtotime($schedule['end']))) ?>" required>
+            <label for="content" class="form-label">Content</label>
+            <textarea name="content" class="form-control" rows="3" required><?= htmlspecialchars($schedule['content']) ?></textarea>
         </div>
         <div class="mb-3">
             <label for="place" class="form-label">Place</label>
             <input type="text" name="place" class="form-control" value="<?= htmlspecialchars($schedule['place']) ?>" required>
         </div>
         <div class="mb-3">
-            <label for="content" class="form-label">Content</label>
-            <textarea name="content" class="form-control" rows="3" required><?= htmlspecialchars($schedule['content']) ?></textarea>
+            <label for="begin" class="form-label">Begin</label>
+            <input type="datetime-local" name="begin" class="form-control" value="<?= htmlspecialchars(date('Y-m-d\TH:i', strtotime($schedule['begin']))) ?>" required>
+        </div>
+        <div class="mb-3">
+            <label for="end" class="form-label">End</label>
+            <input type="datetime-local" name="end" class="form-control" value="<?= htmlspecialchars(date('Y-m-d\TH:i', strtotime($schedule['end']))) ?>" required>
         </div>
         <button type="submit" class="btn btn-primary">Update</button>
         <a href="/schedule/index.php" class="btn btn-secondary">Cancel</a>
