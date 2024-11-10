@@ -37,11 +37,11 @@ $schedules = $stmt->fetchAll();
     <div class="alert alert-success">Schedule created successfully.</div>
     <?php endif; ?>
 
-    <a href="schedule_create.php" class="btn btn-success mb-3">Add New Schedule</a>
+    <a href="/schedule/schedule_create.php" class="btn btn-success mb-3">Add New Schedule</a>
 
     <div class="mb-3">
-        <a href="schedule_month.php" class="btn btn-info mr-1">View Monthly Schedule</a>
-        <a href="schedule_week.php" class="btn btn-info mr-1">View Weekly Schedule</a>
+        <a href="/schedule/schedule_month.php" class="btn btn-info mr-1">View Monthly Schedule</a>
+        <a href="/schedule/schedule_week.php" class="btn btn-info mr-1">View Weekly Schedule</a>
     </div>
 
     <table class="table table-bordered">
@@ -62,8 +62,8 @@ $schedules = $stmt->fetchAll();
                 <td><?= htmlspecialchars($schedule['place']) ?></td>
                 <td><?= htmlspecialchars($schedule['content']) ?></td>
                 <td>
-                    <a href="schedule_edit.php?id=<?= $schedule['id'] ?>" class="btn btn-warning btn-sm">Edit</a>
-                    <a href="schedule_delete.php?id=<?= $schedule['id'] ?>" class="btn btn-danger btn-sm">Delete</a>
+                    <a href="/schedule/schedule_edit.php?id=<?= $schedule['id'] ?>" class="btn btn-warning btn-sm">Edit</a>
+                    <a href="/schedule/schedule_delete.php?id=<?= $schedule['id'] ?>" class="btn btn-danger btn-sm">Delete</a>
                 </td>
             </tr>
         <?php endforeach; ?>
