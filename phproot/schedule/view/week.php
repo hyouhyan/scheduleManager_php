@@ -24,8 +24,8 @@ if ($week < 1) {
 }
 
 // 週の開始日と終了日を計算
-$start_of_week = date('Y-m-d', strtotime("$year-W$week-1"));
-$end_of_week = date('Y-m-d', strtotime("$year-W$week-7"));
+$start_of_week = date('Y-m-d', strtotime("{$year}-W" . str_pad($week, 2, '0', STR_PAD_LEFT) . "-1"));
+$end_of_week = date('Y-m-d', strtotime("{$year}-W" . str_pad($week, 2, '0', STR_PAD_LEFT) . "-7"));
 
 // スケジュールを取得
 $stmt = $pdo->prepare("SELECT * FROM schedules WHERE DATE(begin) BETWEEN :start_of_week AND :end_of_week ORDER BY begin ASC");
