@@ -19,6 +19,10 @@ $schedules = $stmt->fetchAll();
 </head>
 <body>
 <div class="container mt-5">
+    <div class="d-flex justify-content-end">
+        <a href="logout.php" class="btn btn-danger">Logout</a>
+    </div>
+
     <h2>Your Schedules</h2>
 
     <?php if (isset($_GET['message']) && $_GET['message'] === 'deleted'): ?>
