@@ -12,6 +12,17 @@ if (!isset($_SESSION['user_id'])) {
 $year = isset($_GET['year']) ? (int)$_GET['year'] : date('Y');
 $month = isset($_GET['month']) ? (int)$_GET['month'] : date('m');
 
+// 月のオーバーフローを調整
+if ($month < 1) {
+    $year--;
+    $month = 12;
+    header("Location: ?year=$year&month=$month");
+} elseif ($month > 12) {
+    $year++;
+    $month = 1;
+    header("Location: ?year=$year&month=$month");
+}
+
 // 月の初日と最終日を取得
 $first_day = "$year-$month-01";
 $last_day = date('Y-m-t', strtotime($first_day));
