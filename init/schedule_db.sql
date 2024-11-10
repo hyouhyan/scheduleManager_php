@@ -13,4 +13,5 @@ CREATE TABLE schedules (
     end         datetime        NOT NULL,
     place       varchar(256)    NOT NULL,
     content     text            NOT NULL,
+    PRIMARY KEY (id)
 );
