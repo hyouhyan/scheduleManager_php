@@ -34,6 +34,11 @@ $schedules = $stmt->fetchAll();
     <?php endif; ?>
 
     <a href="schedule_create.php" class="btn btn-success mb-3">Add New Schedule</a>
+
+    <div class="mb-3">
+        <a href="schedule_month.php" class="btn btn-info">View Monthly Schedule</a>
+    </div>
+
     <table class="table table-bordered">
         <thead>
         <tr>
