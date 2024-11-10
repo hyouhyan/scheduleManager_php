@@ -28,3 +28,21 @@ PHPとMySQLを使用したスケジュール管理アプリ
     mysql > `source ./init/schedule_db.sql`
 3. dbを抜ける
     mysql > `exit`
+
+## 実行
+`phproot`をルートディレクトリとしてMAMPに設定
+
+## ファイル構成
+```
+phproot/
+├── db.php
+├── index.php
+├── login.php
+├── logout.php
+├── schedule.php
+├── schedule_create.php
+├── schedule_delete.php
+├── schedule_edit.php
+├── schedule_month.php
+└── schedule_week.php
+```
