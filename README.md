@@ -29,7 +29,10 @@ PHPとMySQLを使用したスケジュール管理アプリ
     $ `/Applications/MAMP/Library/bin/mysql80/bin/mysql -u root -p`
     Enter Password: `root`
 2. db作成
-    mysql > `source ./init/schedule_db.sql`
+    mysql > `source ./init/schedule_db.sql`  
+4. テストレコードを利用する場合  
+    (利用しない場合、この手順は飛ばす)  
+    mysql > `source ./init/add_test_recode.sql`
 3. dbを抜ける
     mysql > `exit`
 
