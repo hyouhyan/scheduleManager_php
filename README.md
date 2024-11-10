@@ -36,14 +36,19 @@ PHPとMySQLを使用したスケジュール管理アプリ
 # ファイル構成
 ```
 phproot/
-├── db.php
-├── index.php
-├── login.php
-├── logout.php
-├── schedule.php
-├── schedule_create.php
-├── schedule_delete.php
-├── schedule_edit.php
-├── schedule_month.php
-└── schedule_week.php
+├── auth/
+│   ├── login.php
+│   └── logout.php
+├── config/
+│   └── db.php
+├── schedule/
+│   ├── manage/
+│   │   ├── create.php
+│   │   ├── delete.php
+│   │   └── edit.php
+│   ├── view/
+│   │   ├── month.php
+│   │   └── week.php
+│   └── index.php
+└── index.html
 ```
