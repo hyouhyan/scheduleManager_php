@@ -35,8 +35,8 @@ $days_of_week = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturd
 <div class="container mt-5">
     <h2>Weekly Schedule for Week <?= $week ?>, <?= $year ?></h2>
     <div class="d-flex justify-content-between mb-3">
-        <a href="schedule_week.php?year=<?= $year ?>&week=<?= $week - 1 ?>" class="btn btn-outline-secondary">&lt; Previous Week</a>
-        <a href="schedule_week.php?year=<?= $year ?>&week=<?= $week + 1 ?>" class="btn btn-outline-secondary">Next Week &gt;</a>
+        <a href="?year=<?= $year ?>&week=<?= $week - 1 ?>" class="btn btn-outline-secondary">&lt; Previous Week</a>
+        <a href="?year=<?= $year ?>&week=<?= $week + 1 ?>" class="btn btn-outline-secondary">Next Week &gt;</a>
     </div>
 
     <div class="list-group">

@@ -55,8 +55,8 @@ $total_days = date('t', strtotime($first_day));
 <div class="container mt-5">
     <h2>Monthly Schedule for <?= date('F Y', strtotime($first_day)) ?></h2>
     <div class="d-flex justify-content-between mb-3">
-        <a href="schedule_month.php?year=<?= $year ?>&month=<?= $month - 1 ?>" class="btn btn-outline-secondary">&lt; Previous</a>
-        <a href="schedule_month.php?year=<?= $year ?>&month=<?= $month + 1 ?>" class="btn btn-outline-secondary">Next &gt;</a>
+        <a href="?year=<?= $year ?>&month=<?= $month - 1 ?>" class="btn btn-outline-secondary">&lt; Previous</a>
+        <a href="?year=<?= $year ?>&month=<?= $month + 1 ?>" class="btn btn-outline-secondary">Next &gt;</a>
     </div>
     <table class="table table-bordered calendar">
         <thead>
