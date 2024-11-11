@@ -87,7 +87,10 @@ $total_days = date('t', strtotime($first_day));
 
             // カレンダーの日付を挿入
             for ($day = 1; $day <= $total_days; $day++) {
-                $current_date = "$year-$month-" . str_pad($day, 2, '0', STR_PAD_LEFT);
+                $formatted_month = str_pad($month, 2, '0', STR_PAD_LEFT);
+                $formatted_day = str_pad($day, 2, '0', STR_PAD_LEFT);
+
+                $current_date = "$year-$formatted_month-$formatted_day";
                 echo '<td>';
                 echo "<strong>$day</strong>";
 
