@@ -37,7 +37,7 @@ $stmt = $pdo->prepare("
 $stmt->execute(['start_of_week' => $start_of_week, 'end_of_week' => $end_of_week]);
 $schedules = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
-$days_of_week = ['月', '火', '水', '木', '金', '土', '日'];
+$days_of_week = ['日', '月', '火', '水', '木', '金', '土'];
 ?>
 
 <!DOCTYPE html>
