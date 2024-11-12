@@ -88,6 +88,9 @@ $days_of_week = ['日', '月', '火', '水', '木', '金', '土'];
                                 $title = htmlspecialchars($schedule['content']);
                                 $begin_date = date('Y-m-d', strtotime($schedule['begin']));
                                 $end_date = date('Y-m-d', strtotime($schedule['end']));
+
+                                $begin_time = date('H:i', strtotime($schedule['begin']));
+                                $end_time = date('H:i', strtotime($schedule['end']));
                                 // 終了日が翌日以降の時、Day2, Day3, ... と表示
                                 // beginの日付とendの日付が異なる時
                                 if (strpos($begin_date, $end_date) !== 0) {
@@ -95,11 +98,14 @@ $days_of_week = ['日', '月', '火', '水', '木', '金', '土'];
                                     $days_diff = (strtotime($current_date) - strtotime($schedule['begin'])) / (60 * 60 * 24);
                                     $title .= ' (Day' . $days_diff + 1 . ')';
                                     
+                                    if ($current_date != $end_date) {
+                                        $end_time = '24:00';
+                                    }
                                 }
                                 ?>
                                 <strong><?= $title ?></strong>
                                 <br>
-                                <small><?= date('H:i', strtotime($schedule['begin'])) ?> - <?= date('H:i', strtotime($schedule['end'])) ?> @ <?= htmlspecialchars($schedule['place']) ?></small>
+                                <small><?= "{$begin_time} - {$end_time}" ?> @ <?= htmlspecialchars($schedule['place']) ?></small>
                             </li>
                         <?php endforeach; ?>
                     </ul>

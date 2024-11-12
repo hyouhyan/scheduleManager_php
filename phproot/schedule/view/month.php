@@ -122,18 +122,24 @@ $total_days = date('t', strtotime($first_day));
                     $end_date = date('Y-m-d', strtotime($schedule['end']));
                     if ($begin_date <= $current_date && $current_date <= $end_date) {
                         $title = htmlspecialchars($schedule['content']);
+                        $begin_time = date('H:i', strtotime($schedule['begin']));
+                        $end_time = date('H:i', strtotime($schedule['end']));
                         // beginの日付とendの日付が異なる時
                         if (strpos($begin_date, $end_date) !== 0) {
                             // 今日が何日目かを計算
                             $days_diff = (strtotime($current_date) - strtotime($schedule['begin'])) / (60 * 60 * 24);
                             $title .= ' (Day' . $days_diff + 1 . ')';
                             
+                            // 最終日以外は日を跨ぐので、終了日を24:00に設定
+                            if ($current_date != $end_date) {
+                                $end_time = '24:00';
+                            }
                         }
                         
                         echo '<div class="schedule-item">';
                         echo $title;
                         echo '<br><small>@ ' . htmlspecialchars($schedule['place']) . '</small>';
-                        echo '<br><small>' . date('H:i', strtotime($schedule['begin'])) . ' - ' . date('H:i', strtotime($schedule['end'])) . '</small>';
+                        echo '<br><small>' . $begin_time . ' - ' . $end_time . '</small>';
                         echo '</div>';
                     }
                 }
