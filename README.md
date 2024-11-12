@@ -32,7 +32,7 @@ PHPとMySQLを使用したスケジュール管理アプリ
     mysql > `source ./init/schedule_db.sql`  
 4. テストレコードを利用する場合  
     (利用しない場合、この手順は飛ばす)  
-    mysql > `source ./init/add_test_recode.sql`
+    mysql > `source ./init/add_test_record.sql`
 3. dbを抜ける  
     mysql > `exit`
 
