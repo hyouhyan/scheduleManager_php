@@ -39,6 +39,11 @@ $stmt = $pdo->prepare("
 $stmt->execute(['first_day' => $first_day, 'last_day' => $last_day]);
 $schedules = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
+// デバッグ用にスケジュールを表示
+// echo '<pre>';
+// print_r($schedules);
+// echo '</pre>';
+
 // カレンダーのヘッダーを作成
 $days_of_week = ['日', '月', '火', '水', '木', '金', '土'];
 $first_day_of_week = date('w', strtotime($first_day));
@@ -108,18 +113,23 @@ $total_days = date('t', strtotime($first_day));
 
                 // スケジュールを表示
                 foreach ($schedules as $schedule) {
-                    if (strpos($schedule['begin'], $current_date) === 0 || strpos($schedule['end'], $current_date) === 0) {
+                    // begin <= current_date <= end の場合
+                    // 時間を考慮せず日付のみで判定
+                    $begin_date = date('Y-m-d', strtotime($schedule['begin']));
+                    $end_date = date('Y-m-d', strtotime($schedule['end']));
+                    if ($begin_date <= $current_date && $current_date <= $end_date) {
                         $title = htmlspecialchars($schedule['content']);
-                        // 終了日が翌日以降の時、Day2, Day3, ... と表示
-                        if (strpos($schedule['end'], $current_date) !== 0) {
-                            $title = $title . ' (Day' . (date_diff(date_create($schedule['begin']), date_create($schedule['end']))->days) . ')';
-                        }else if (strpos($schedule['begin'], $current_date) === 0 && strpos($schedule['end'], $current_date) === 0) {
-                            // 開始日と終了日が当日と同じ
-                        }else{
-                            $title = $title . ' (Day' . (date_diff(date_create($schedule['begin']), date_create($schedule['end']))->days + 1) . ')';
+                        // beginの日付とendの日付が異なる時
+                        if (strpos($begin_date, $end_date) !== 0) {
+                            // 今日が何日目かを計算
+                            $days_diff = (strtotime($current_date) - strtotime($schedule['begin'])) / (60 * 60 * 24);
+                            $title .= ' (Day' . $days_diff + 1 . ')';
+                            
                         }
+                        
                         echo '<div class="schedule-item">';
                         echo $title;
+                        echo '<br><small>@ ' . htmlspecialchars($schedule['place']) . '</small>';
                         echo '<br><small>' . date('H:i', strtotime($schedule['begin'])) . ' - ' . date('H:i', strtotime($schedule['end'])) . '</small>';
                         echo '</div>';
                     }
