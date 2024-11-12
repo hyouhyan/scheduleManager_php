@@ -40,7 +40,7 @@ $stmt->execute(['first_day' => $first_day, 'last_day' => $last_day]);
 $schedules = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
 // カレンダーのヘッダーを作成
-$days_of_week = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
+$days_of_week = ['日', '月', '火', '水', '木', '金', '土'];
 $first_day_of_week = date('w', strtotime($first_day));
 $total_days = date('t', strtotime($first_day));
 ?>
@@ -71,10 +71,15 @@ $total_days = date('t', strtotime($first_day));
 </head>
 <body>
 <div class="container mt-5">
-    <h2>Monthly Schedule for <?= date('F Y', strtotime($first_day)) ?></h2>
+    <h2>月間スケジュール 
+        <?php
+        $formatted_month = str_pad($month, 2, '0', STR_PAD_LEFT);
+        echo $year."年".$formatted_month."月";
+        ?>
+    </h2>
     <div class="d-flex justify-content-between mb-3">
-        <a href="?year=<?= $year ?>&month=<?= $month - 1 ?>" class="btn btn-outline-secondary">&lt; Previous</a>
-        <a href="?year=<?= $year ?>&month=<?= $month + 1 ?>" class="btn btn-outline-secondary">Next &gt;</a>
+        <a href="?year=<?= $year ?>&month=<?= $month - 1 ?>" class="btn btn-outline-secondary">&lt; 先月</a>
+        <a href="?year=<?= $year ?>&month=<?= $month + 1 ?>" class="btn btn-outline-secondary">翌月 &gt;</a>
     </div>
     <table class="table table-bordered calendar">
         <thead>
@@ -137,7 +142,7 @@ $total_days = date('t', strtotime($first_day));
         </tr>
         </tbody>
     </table>
-    <a href="/schedule/index.php" class="btn btn-secondary">Back to Schedules</a>
+    <a href="/schedule/index.php" class="btn btn-secondary">一覧表示に戻る</a>
 </div>
 </body>
 </html>
