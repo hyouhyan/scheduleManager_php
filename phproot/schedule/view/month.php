@@ -96,7 +96,7 @@ $total_days = date('t', strtotime($first_day));
 
                 // スケジュールを表示
                 foreach ($schedules as $schedule) {
-                    if (strpos($schedule['begin'], $current_date) === 0) {
+                    if (strpos($schedule['begin'], $current_date) === 0 || strpos($schedule['end'], $current_date) === 0) {
                         echo '<div class="schedule-item">';
                         echo htmlspecialchars($schedule['content']);
                         echo '<br><small>' . date('H:i', strtotime($schedule['begin'])) . ' - ' . date('H:i', strtotime($schedule['end'])) . '</small>';
