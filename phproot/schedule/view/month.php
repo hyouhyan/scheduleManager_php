@@ -28,7 +28,14 @@ $first_day = "$year-$month-01";
 $last_day = date('Y-m-t', strtotime($first_day));
 
 // スケジュールを取得
-$stmt = $pdo->prepare("SELECT * FROM schedules WHERE begin BETWEEN :first_day AND :last_day ORDER BY begin ASC");
+$stmt = $pdo->prepare("
+    SELECT * FROM schedules 
+    WHERE 
+        (begin BETWEEN :first_day AND :last_day) OR 
+        (end BETWEEN :first_day AND :last_day) OR 
+        (begin <= :first_day AND end >= :last_day)
+    ORDER BY begin ASC
+");
 $stmt->execute(['first_day' => $first_day, 'last_day' => $last_day]);
 $schedules = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
