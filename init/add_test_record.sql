@@ -1,13 +1,13 @@
 use schedule;
 
 INSERT INTO schedules (begin, end, place, content)
-VALUES ('2024-11-04 16:30:00', '2024-11-104 21:30:00', '研究室', 'ハロウィンパーティー');
+VALUES ('2024-11-04 16:30:00', '2024-11-04 21:30:00', '研究室', 'ハロウィンパーティー');
 
 INSERT INTO schedules (begin, end, place, content)
-VALUES ('2024-11-06 12:00:00', '2024-11-14 20:00:00', 'バイト先', 'バイト');
+VALUES ('2024-11-06 12:00:00', '2024-11-06 20:00:00', 'バイト先', 'バイト');
 
 INSERT INTO schedules (begin, end, place, content)
-VALUES ('2024-11-07 18:00:00', '2024-11-14 19:00:00', '研究室', 'B3ゼミ');
+VALUES ('2024-11-07 18:00:00', '2024-11-07 19:00:00', '研究室', 'B3ゼミ');
 
 INSERT INTO schedules (begin, end, place, content)
 VALUES ('2024-11-11 09:00:00', '2024-11-11 16:30:00', 'バイト先', 'バイト');
