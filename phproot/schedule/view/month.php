@@ -59,7 +59,10 @@ $total_days = date('t', strtotime($first_day));
         .calendar {
             table-layout: fixed;
         }
-        .calendar th, .calendar td {
+        .calendar th {
+            background-color: #f8f9fa;
+        }
+        .calendar td {
             text-align: center;
             vertical-align: top;
             height: 100px;
@@ -67,10 +70,10 @@ $total_days = date('t', strtotime($first_day));
         .schedule-item {
             font-size: 0.85em;
             margin-bottom: 5px;
-            background-color: #f8f9fa;
-            border: 1px solid #dee2e6;
-            padding: 2px;
-            border-radius: 3px;
+            background-color: #e9ecef;
+            border: 1px solid #ced4da;
+            padding: 4px;
+            border-radius: 4px;
         }
     </style>
 </head>
