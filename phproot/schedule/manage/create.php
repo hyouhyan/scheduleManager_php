@@ -38,26 +38,26 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 </head>
 <body>
 <div class="container mt-5">
-    <h2>Create New Schedule</h2>
+    <h2>スケジュール追加</h2>
     <form method="POST">
         <div class="mb-3">
-            <label for="content" class="form-label">Content</label>
+            <label for="content" class="form-label">名称</label>
             <textarea name="content" class="form-control" rows="3" required></textarea>
         </div>
         <div class="mb-3">
-            <label for="place" class="form-label">Place</label>
+            <label for="place" class="form-label">場所</label>
             <input type="text" name="place" class="form-control" required>
         </div>
         <div class="mb-3">
-            <label for="begin" class="form-label">Begin</label>
+            <label for="begin" class="form-label">開始</label>
             <input type="datetime-local" name="begin" class="form-control" required>
         </div>
         <div class="mb-3">
-            <label for="end" class="form-label">End</label>
+            <label for="end" class="form-label">終了</label>
             <input type="datetime-local" name="end" class="form-control" required>
         </div>
-        <button type="submit" class="btn btn-primary">Create</button>
-        <a href="/schedule/index.php" class="btn btn-secondary">Cancel</a>
+        <button type="submit" class="btn btn-primary">作成</button>
+        <a href="/schedule/index.php" class="btn btn-secondary">キャンセル</a>
     </form>
 </div>
 </body>

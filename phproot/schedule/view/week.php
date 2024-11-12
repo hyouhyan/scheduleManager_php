@@ -37,7 +37,7 @@ $stmt = $pdo->prepare("
 $stmt->execute(['start_of_week' => $start_of_week, 'end_of_week' => $end_of_week]);
 $schedules = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
-$days_of_week = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
+$days_of_week = ['月', '火', '水', '木', '金', '土', '日'];
 ?>
 
 <!DOCTYPE html>
@@ -48,10 +48,17 @@ $days_of_week = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturd
 </head>
 <body>
 <div class="container mt-5">
-    <h2>Weekly Schedule for Week <?= $week ?>, <?= $year ?></h2>
+    <h2>
+        <?php
+            $start_of_week_date = date_create($start_of_week);
+            $end_of_week_date = date_create($end_of_week);
+
+            echo "{$start_of_week_date->format('Y年')} 第{$week}週 ({$start_of_week_date->format('m/d')} - {$end_of_week_date->format('m/d')})";
+        ?>
+    </h2>
     <div class="d-flex justify-content-between mb-3">
-        <a href="?year=<?= $year ?>&week=<?= $week - 1 ?>" class="btn btn-outline-secondary">&lt; Previous Week</a>
-        <a href="?year=<?= $year ?>&week=<?= $week + 1 ?>" class="btn btn-outline-secondary">Next Week &gt;</a>
+        <a href="?year=<?= $year ?>&week=<?= $week - 1 ?>" class="btn btn-outline-secondary">&lt; 先週</a>
+        <a href="?year=<?= $year ?>&week=<?= $week + 1 ?>" class="btn btn-outline-secondary">翌週 &gt;</a>
     </div>
 
     <div class="list-group">
@@ -66,7 +73,13 @@ $days_of_week = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturd
             });
             ?>
             <div class="list-group-item">
-                <h5><?= $day ?> (<?= $current_date ?>)</h5>
+                <h5>
+                    <?php
+                        $day_of_week = date('w', strtotime($current_date));
+                        // MM/DD(曜日) の形式で表示
+                        echo date('m/d', strtotime($current_date)) . ' (' . $days_of_week[$day_of_week] . ')';
+                    ?>
+                </h5>
                 <?php if (count($day_schedules) > 0): ?>
                     <ul class="list-unstyled">
                         <?php foreach ($day_schedules as $schedule): ?>
@@ -89,12 +102,12 @@ $days_of_week = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturd
                         <?php endforeach; ?>
                     </ul>
                 <?php else: ?>
-                    <p>No schedules for this day.</p>
+                    <p>予定なし</p>
                 <?php endif; ?>
             </div>
         <?php endforeach; ?>
     </div>
-    <a href="/schedule/index.php" class="btn btn-secondary mt-3">Back to Schedules</a>
+    <a href="/schedule/index.php" class="btn btn-secondary mt-3">一覧表示に戻る</a>
 </div>
 </body>
 </html>

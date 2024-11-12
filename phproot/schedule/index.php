@@ -20,38 +20,38 @@ $schedules = $stmt->fetchAll();
 <body>
 <div class="container mt-5">
     <div class="d-flex justify-content-end">
-        <a href="/auth/logout.php" class="btn btn-danger">Logout</a>
+        <a href="/auth/logout.php" class="btn btn-danger">ログアウト</a>
     </div>
 
-    <h2>Your Schedules</h2>
+    <h2>スケジュール一覧</h2>
 
     <?php if (isset($_GET['message']) && $_GET['message'] === 'deleted'): ?>
-    <div class="alert alert-success">Schedule deleted successfully.</div>
+    <div class="alert alert-success">スケジュールの削除に成功しました。</div>
     <?php endif; ?>
 
     <?php if (isset($_GET['message']) && $_GET['message'] === 'updated'): ?>
-    <div class="alert alert-success">Schedule updated successfully.</div>
+    <div class="alert alert-success">スケジュールの更新に成功しました。</div>
     <?php endif; ?>
 
     <?php if (isset($_GET['message']) && $_GET['message'] === 'created'): ?>
-    <div class="alert alert-success">Schedule created successfully.</div>
+    <div class="alert alert-success">スケジュールの作成に成功しました。</div>
     <?php endif; ?>
 
-    <a href="/schedule/manage/create.php" class="btn btn-success mb-3">Add New Schedule</a>
+    <a href="/schedule/manage/create.php" class="btn btn-success mb-3">追加</a>
 
     <div class="mb-3">
-        <a href="/schedule/view/month.php" class="btn btn-info mr-1">View Monthly Schedule</a>
-        <a href="/schedule/view/week.php" class="btn btn-info mr-1">View Weekly Schedule</a>
+        <a href="/schedule/view/month.php" class="btn btn-info mr-1">月間</a>
+        <a href="/schedule/view/week.php" class="btn btn-info mr-1">週間</a>
     </div>
 
     <table class="table table-bordered">
         <thead>
         <tr>
-            <th>Content</th>
-            <th>Place</th>
-            <th>Begin</th>
-            <th>End</th>
-            <th>Actions</th>
+            <th>名称</th>
+            <th>場所</th>
+            <th>開始</th>
+            <th>終了</th>
+            <th>編集</th>
         </tr>
         </thead>
         <tbody>
@@ -59,11 +59,20 @@ $schedules = $stmt->fetchAll();
             <tr>
                 <td><?= htmlspecialchars($schedule['content']) ?></td>
                 <td><?= htmlspecialchars($schedule['place']) ?></td>
-                <td><?= htmlspecialchars($schedule['begin']) ?></td>
-                <td><?= htmlspecialchars($schedule['end']) ?></td>
                 <td>
-                    <a href="/schedule/manage/edit.php?id=<?= $schedule['id'] ?>" class="btn btn-warning btn-sm">Edit</a>
-                    <a href="/schedule/manage/delete.php?id=<?= $schedule['id'] ?>" class="btn btn-danger btn-sm">Delete</a>
+                    <?php
+                        $begin = new DateTime($schedule['begin']);
+                        echo $begin->format('Y年m月d日 H:i');
+                    ?>
+                </td>
+                <td>
+                    <?php
+                        $end = new DateTime($schedule['end']);
+                        echo $end->format('Y年m月d日 H:i');
+                    ?>
+                <td>
+                    <a href="/schedule/manage/edit.php?id=<?= $schedule['id'] ?>" class="btn btn-warning btn-sm">編集</a>
+                    <a href="/schedule/manage/delete.php?id=<?= $schedule['id'] ?>" class="btn btn-danger btn-sm">削除</a>
                 </td>
             </tr>
         <?php endforeach; ?>
