@@ -36,7 +36,8 @@ PHPとMySQLを使用したスケジュール管理アプリ
 3. dbを抜ける  
     mysql > `exit`
 
-# ファイル構成
+# 構成
+## ファイル構成
 ```
 phproot/
 ├── auth/
@@ -55,3 +56,21 @@ phproot/
 │   └── index.php
 └── index.html
 ```
+
+## データベース構成
+- データベース名: `schedule`
+- 文字セット: `utf8mb4`
+- 照合順序: `utf8mb4_general_ci`
+- 主キー: `id`
+
+### テーブル構成
+
+`schedules` テーブル
+
+| カラム名 | データ型         | 必須 | 説明                     |
+|----------|------------------|------|--------------------------|
+| `id`     | `int(11)`        | YES  | 自動増分の主キー         |
+| `begin`  | `datetime`       | YES  | スケジュールの開始日時   |
+| `end`    | `datetime`       | YES  | スケジュールの終了日時   |
+| `place`  | `varchar(256)`   | YES  | スケジュールの場所       |
+| `content`| `text`           | YES  | スケジュールの内容       |
