@@ -2,37 +2,41 @@
 session_start();
 require $_SERVER['DOCUMENT_ROOT'].'/config/db.php';
 
-// ユーザーがログインしていない場合、ログインページにリダイレクト
 if (!isset($_SESSION['user_id'])) {
     header('Location: /auth/login.php');
     exit;
 }
 
-// 現在の週を取得
 $year = isset($_GET['year']) ? (int)$_GET['year'] : date('Y');
 $week = isset($_GET['week']) ? (int)$_GET['week'] : date('W');
 
-// 週のオーバーフローを調整
 if ($week < 1) {
     $year--;
     $week = 52;
     header("Location: ?year=$year&week=$week");
+    exit;
 } elseif ($week > 52) {
     $year++;
     $week = 1;
     header("Location: ?year=$year&week=$week");
+    exit;
 }
 
-// 週の開始日と終了日を計算
 $start_of_week = date('Y-m-d', strtotime("{$year}-W" . str_pad($week, 2, '0', STR_PAD_LEFT) . "-1"));
 $end_of_week = date('Y-m-d', strtotime("{$year}-W" . str_pad($week, 2, '0', STR_PAD_LEFT) . "-7"));
 
-// スケジュールを取得
-$stmt = $pdo->prepare("SELECT * FROM schedules WHERE DATE(begin) BETWEEN :start_of_week AND :end_of_week ORDER BY begin ASC");
+$stmt = $pdo->prepare("
+    SELECT * FROM schedules 
+    WHERE 
+        (begin BETWEEN :start_of_week AND :end_of_week) OR 
+        (end BETWEEN :start_of_week AND :end_of_week) OR 
+        (begin <= :start_of_week AND end >= :end_of_week)
+    ORDER BY begin ASC
+");
+
 $stmt->execute(['start_of_week' => $start_of_week, 'end_of_week' => $end_of_week]);
 $schedules = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
-// 曜日配列
 $days_of_week = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
 ?>
 
@@ -54,15 +58,31 @@ $days_of_week = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturd
         <?php foreach ($days_of_week as $i => $day): ?>
             <?php
             $current_date = date('Y-m-d', strtotime("$start_of_week +$i days"));
-            $day_schedules = array_filter($schedules, fn($schedule) => strpos($schedule['begin'], $current_date) === 0);
+            $day_schedules = array_filter($schedules, function ($schedule) use ($current_date) {
+                return 
+                    ($schedule['begin'] <= $current_date && $schedule['end'] >= $current_date) ||
+                    (strpos($schedule['begin'], $current_date) === 0) ||
+                    (strpos($schedule['end'], $current_date) === 0);
+            });
             ?>
             <div class="list-group-item">
-                <h5><?= $day ?> (<?= date('Y-m-d', strtotime($current_date)) ?>)</h5>
+                <h5><?= $day ?> (<?= $current_date ?>)</h5>
                 <?php if (count($day_schedules) > 0): ?>
                     <ul class="list-unstyled">
                         <?php foreach ($day_schedules as $schedule): ?>
                             <li>
-                                <strong><?= htmlspecialchars($schedule['content']) ?></strong>
+                                <?php 
+                                $title = htmlspecialchars($schedule['content']);
+                                // 終了日が翌日以降の時、Day2, Day3, ... と表示
+                                if (strpos($schedule['end'], $current_date) !== 0) {
+                                    $title = $title . ' (Day' . (date_diff(date_create($schedule['begin']), date_create($schedule['end']))->days) . ')';
+                                }else if (strpos($schedule['begin'], $current_date) === 0 && strpos($schedule['end'], $current_date) === 0) {
+                                    // 開始日と終了日が当日と同じ
+                                }else{
+                                    $title = $title . ' (Day' . (date_diff(date_create($schedule['begin']), date_create($schedule['end']))->days + 1) . ')';
+                                }
+                                ?>
+                                <strong><?= $title ?></strong>
                                 <br>
                                 <small><?= date('H:i', strtotime($schedule['begin'])) ?> - <?= date('H:i', strtotime($schedule['end'])) ?> @ <?= htmlspecialchars($schedule['place']) ?></small>
                             </li>

@@ -28,7 +28,14 @@ $first_day = "$year-$month-01";
 $last_day = date('Y-m-t', strtotime($first_day));
 
 // スケジュールを取得
-$stmt = $pdo->prepare("SELECT * FROM schedules WHERE begin BETWEEN :first_day AND :last_day ORDER BY begin ASC");
+$stmt = $pdo->prepare("
+    SELECT * FROM schedules 
+    WHERE 
+        (begin BETWEEN :first_day AND :last_day) OR 
+        (end BETWEEN :first_day AND :last_day) OR 
+        (begin <= :first_day AND end >= :last_day)
+    ORDER BY begin ASC
+");
 $stmt->execute(['first_day' => $first_day, 'last_day' => $last_day]);
 $schedules = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
@@ -96,9 +103,18 @@ $total_days = date('t', strtotime($first_day));
 
                 // スケジュールを表示
                 foreach ($schedules as $schedule) {
-                    if (strpos($schedule['begin'], $current_date) === 0) {
+                    if (strpos($schedule['begin'], $current_date) === 0 || strpos($schedule['end'], $current_date) === 0) {
+                        $title = htmlspecialchars($schedule['content']);
+                        // 終了日が翌日以降の時、Day2, Day3, ... と表示
+                        if (strpos($schedule['end'], $current_date) !== 0) {
+                            $title = $title . ' (Day' . (date_diff(date_create($schedule['begin']), date_create($schedule['end']))->days) . ')';
+                        }else if (strpos($schedule['begin'], $current_date) === 0 && strpos($schedule['end'], $current_date) === 0) {
+                            // 開始日と終了日が当日と同じ
+                        }else{
+                            $title = $title . ' (Day' . (date_diff(date_create($schedule['begin']), date_create($schedule['end']))->days + 1) . ')';
+                        }
                         echo '<div class="schedule-item">';
-                        echo htmlspecialchars($schedule['content']);
+                        echo $title;
                         echo '<br><small>' . date('H:i', strtotime($schedule['begin'])) . ' - ' . date('H:i', strtotime($schedule['end'])) . '</small>';
                         echo '</div>';
                     }
