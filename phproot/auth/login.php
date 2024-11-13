@@ -13,7 +13,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         header('Location: /schedule/index.php');
         exit;
     } else {
-        $error = "Invalid credentials";
+        $error = "ログインに失敗しました。";
     }
 }
 ?>
