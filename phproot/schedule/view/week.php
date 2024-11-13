@@ -1,6 +1,7 @@
 <?php
 session_start();
 require $_SERVER['DOCUMENT_ROOT'].'/config/db.php';
+require $_SERVER['DOCUMENT_ROOT'].'/config/japaneseHoliday.php';
 
 if (!isset($_SESSION['user_id'])) {
     header('Location: /auth/login.php');
@@ -38,6 +39,8 @@ $stmt->execute(['start_of_week' => $start_of_week, 'end_of_week' => $end_of_week
 $schedules = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
 $days_of_week = ['日', '月', '火', '水', '木', '金', '土'];
+
+$holidays = getJapaneseHolidays($year);
 ?>
 
 <!DOCTYPE html>
@@ -89,6 +92,17 @@ $days_of_week = ['日', '月', '火', '水', '木', '金', '土'];
             } elseif ($day_of_week == 6) {
                 $class = 'saturday';
             }
+
+            // 祝日の場合はクラスを追加
+            if (isset($holidays[$current_date])) {
+                $class = 'sunday';
+            }
+
+            // 今日が月曜日で、かつ前日が祝日の場合、振替休日とする
+            if ($day_of_week == 1 && isset($holidays[date('Y-m-d', strtotime($current_date . ' -1 day'))])) {
+                $class = 'sunday';
+            }
+
             ?>
             <div class="list-group-item">
                 <h5 class='<?php echo $class ?>'>
@@ -96,6 +110,16 @@ $days_of_week = ['日', '月', '火', '水', '木', '金', '土'];
                         $day_of_week = date('w', strtotime($current_date));
                         // MM/DD(曜日) の形式で表示
                         echo date('m/d', strtotime($current_date)) . ' (' . $days_of_week[$day_of_week] . ')';
+
+                        // 祝日の場合は表示
+                        if (isset($holidays[$current_date])) {
+                            echo ' ' . $holidays[$current_date];
+                        }
+
+                        // 振替休日の場合
+                        if ($day_of_week == 1 && isset($holidays[date('Y-m-d', strtotime($current_date . ' -1 day'))])) {
+                            echo ' ' . "振替休日";
+                        }
                     ?>
                 </h5>
                 <?php if (count($day_schedules) > 0): ?>

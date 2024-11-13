@@ -1,6 +1,7 @@
 <?php
 session_start();
 require $_SERVER['DOCUMENT_ROOT'].'/config/db.php';
+require $_SERVER['DOCUMENT_ROOT'].'/config/japaneseHoliday.php';
 
 // ユーザーがログインしていない場合、ログインページにリダイレクト
 if (!isset($_SESSION['user_id'])) {
@@ -48,6 +49,8 @@ $schedules = $stmt->fetchAll(PDO::FETCH_ASSOC);
 $days_of_week = ['日', '月', '火', '水', '木', '金', '土'];
 $first_day_of_week = date('w', strtotime($first_day));
 $total_days = date('t', strtotime($first_day));
+
+$holidays = getJapaneseHolidays($year);
 ?>
 
 <!DOCTYPE html>
@@ -136,8 +139,28 @@ $total_days = date('t', strtotime($first_day));
                     $class = 'saturday';
                 }
 
+                // 祝日の場合はクラスを追加
+                if (isset($holidays[$current_date])){
+                    $class = 'sunday';
+                }
+
+                // 今日が月曜日で、かつ前日が祝日の場合、振替休日とする
+                if ($day_of_week == 1 && isset($holidays[date('Y-m-d', strtotime($current_date . ' -1 day'))])) {
+                    $class = 'sunday';
+                }
+
                 echo "<td>";
                 echo "<strong class='$class'>$day</strong>";
+
+                // 祝日の場合名称を表示
+                if (isset($holidays[$current_date])){
+                    echo "<br><small class='$class'>".$holidays[$current_date]."</small>";
+                }
+
+                // 振替休日の場合
+                if ($day_of_week == 1 && isset($holidays[date('Y-m-d', strtotime($current_date . ' -1 day'))])) {
+                    echo "<br><small class='$class'>振替休日</small>";
+                }
 
                 // スケジュールを表示
                 foreach ($schedules as $schedule) {
