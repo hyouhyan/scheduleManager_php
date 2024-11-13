@@ -45,6 +45,14 @@ $days_of_week = ['日', '月', '火', '水', '木', '金', '土'];
 <head>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <title>Weekly Schedule</title>
+    <style>
+        .sunday {
+            color: #ff2222 !important; /* 日曜日の背景を赤 */
+        }
+        .saturday {
+            color: #2244ff !important; /* 土曜日の背景を青 */
+        }
+    </style>
 </head>
 <body>
 <div class="container mt-5">
@@ -71,9 +79,19 @@ $days_of_week = ['日', '月', '火', '水', '木', '金', '土'];
                     (strpos($schedule['begin'], $current_date) === 0) ||
                     (strpos($schedule['end'], $current_date) === 0);
             });
+
+            $day_of_week = date('w', strtotime($current_date));
+
+            // 曜日に応じたクラスを適用
+            $class = '';
+            if ($day_of_week == 0) {
+                $class = 'sunday';
+            } elseif ($day_of_week == 6) {
+                $class = 'saturday';
+            }
             ?>
             <div class="list-group-item">
-                <h5>
+                <h5 class='<?php echo $class ?>'>
                     <?php
                         $day_of_week = date('w', strtotime($current_date));
                         // MM/DD(曜日) の形式で表示

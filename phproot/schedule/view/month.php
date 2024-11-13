@@ -60,6 +60,7 @@ $total_days = date('t', strtotime($first_day));
             table-layout: fixed;
         }
         .calendar th {
+            text-align: center;
             background-color: #f8f9fa;
         }
         .calendar td {
@@ -74,6 +75,12 @@ $total_days = date('t', strtotime($first_day));
             border: 1px solid #ced4da;
             padding: 4px;
             border-radius: 4px;
+        }
+        .sunday {
+            color: #ff2222 !important; /* 日曜日の背景を赤 */
+        }
+        .saturday {
+            color: #2244ff !important; /* 土曜日の背景を青 */
         }
     </style>
 </head>
@@ -92,8 +99,16 @@ $total_days = date('t', strtotime($first_day));
     <table class="table table-bordered calendar">
         <thead>
         <tr>
-            <?php foreach ($days_of_week as $day): ?>
-                <th><?= $day ?></th>
+            <?php foreach ($days_of_week as $index => $day): ?>
+                <?php 
+                    $class = '';
+                    if ($index == 0) {
+                        $class = 'sunday'; // 日曜日
+                    } elseif ($index == 6) {
+                        $class = 'saturday'; // 土曜日
+                    }
+                ?>
+                <th class="<?= $class ?>"><?= $day ?></th>
             <?php endforeach; ?>
         </tr>
         </thead>
@@ -111,8 +126,18 @@ $total_days = date('t', strtotime($first_day));
                 $formatted_day = str_pad($day, 2, '0', STR_PAD_LEFT);
 
                 $current_date = "$year-$formatted_month-$formatted_day";
-                echo '<td>';
-                echo "<strong>$day</strong>";
+                $day_of_week = date('w', strtotime($current_date));
+
+                // 曜日に応じたクラスを適用
+                $class = '';
+                if ($day_of_week == 0) {
+                    $class = 'sunday';
+                } elseif ($day_of_week == 6) {
+                    $class = 'saturday';
+                }
+
+                echo "<td>";
+                echo "<strong class='$class'>$day</strong>";
 
                 // スケジュールを表示
                 foreach ($schedules as $schedule) {

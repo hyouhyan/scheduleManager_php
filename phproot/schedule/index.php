@@ -71,8 +71,8 @@ $schedules = $stmt->fetchAll();
                         echo $end->format('Y年m月d日 H:i');
                     ?>
                 <td>
-                    <a href="/schedule/manage/edit.php?id=<?= $schedule['id'] ?>" class="btn btn-warning btn-sm">編集</a>
-                    <a href="/schedule/manage/delete.php?id=<?= $schedule['id'] ?>" class="btn btn-danger btn-sm">削除</a>
+                    <a href="/schedule/manage/edit.php?id=<?= $schedule['id'] ?>" class="btn btn-warning btn-sm mb-1">編集</a>
+                    <a href="/schedule/manage/delete.php?id=<?= $schedule['id'] ?>" class="btn btn-danger btn-sm mb-1">削除</a>
                 </td>
             </tr>
         <?php endforeach; ?>
