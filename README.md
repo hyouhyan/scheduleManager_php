@@ -44,7 +44,8 @@ phproot/
 │   ├── login.php
 │   └── logout.php
 ├── config/
-│   └── db.php
+│   ├── db.php
+│   └── japaneseHoliday.php
 ├── schedule/
 │   ├── manage/
 │   │   ├── create.php
