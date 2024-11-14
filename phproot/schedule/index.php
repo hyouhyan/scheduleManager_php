@@ -18,7 +18,7 @@ $schedules = $stmt->fetchAll();
     <title>Schedules</title>
 </head>
 <body>
-<div class="container mt-5">
+<div class="container mt-3 mb-3">
     <div class="d-flex justify-content-end">
         <a href="/auth/logout.php" class="btn btn-danger">ログアウト</a>
     </div>
