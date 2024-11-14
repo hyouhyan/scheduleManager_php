@@ -209,7 +209,11 @@ $holidays = getJapaneseHolidays($year);
         </tr>
         </tbody>
     </table>
-    <a href="/schedule/index.php" class="btn btn-secondary">一覧表示に戻る</a>
+    <div class="d-flex justify-content-between align-items-center mt-3">
+        <a href="?year=<?= $year ?>&month=<?= $month - 1 ?>" class="btn btn-outline-secondary">&lt; 先月</a>
+        <a href="?year=<?= $year ?>&month=<?= $month + 1 ?>" class="btn btn-outline-secondary">翌月 &gt;</a>
+    </div>
+    <a href="/schedule/index.php" class="btn btn-secondary mt-3">一覧表示に戻る</a>
 </div>
 </body>
 </html>

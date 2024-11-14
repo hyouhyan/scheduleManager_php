@@ -157,6 +157,10 @@ $holidays = getJapaneseHolidays($year);
             </div>
         <?php endforeach; ?>
     </div>
+    <div class="d-flex justify-content-between mt-3">
+        <a href="?year=<?= $year ?>&week=<?= $week - 1 ?>" class="btn btn-outline-secondary">&lt; 先週</a>
+        <a href="?year=<?= $year ?>&week=<?= $week + 1 ?>" class="btn btn-outline-secondary">翌週 &gt;</a>
+    </div>
     <a href="/schedule/index.php" class="btn btn-secondary mt-3">一覧表示に戻る</a>
 </div>
 </body>
