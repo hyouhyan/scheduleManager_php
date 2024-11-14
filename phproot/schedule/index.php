@@ -37,11 +37,12 @@ $schedules = $stmt->fetchAll();
     <div class="alert alert-success">スケジュールの作成に成功しました。</div>
     <?php endif; ?>
 
-    <a href="/schedule/manage/create.php" class="btn btn-success mb-3">追加</a>
-
-    <div class="mb-3">
-        <a href="/schedule/view/month.php" class="btn btn-info mr-1">月間</a>
-        <a href="/schedule/view/week.php" class="btn btn-info mr-1">週間</a>
+    <div class="mb-3 d-flex justify-content-between align-items-center">
+        <div>
+            <a href="/schedule/view/month.php" class="btn btn-info mr-1">月間</a>
+            <a href="/schedule/view/week.php" class="btn btn-info mr-1">週間</a>
+        </div>
+        <a href="/schedule/manage/create.php" class="btn btn-success mr-4">追加</a>
     </div>
 
     <table class="table table-bordered">
