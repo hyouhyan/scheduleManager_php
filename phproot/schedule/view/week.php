@@ -58,7 +58,7 @@ $holidays = getJapaneseHolidays($year);
     </style>
 </head>
 <body>
-<div class="container mt-5">
+<div class="container mt-3 mb-3">
     <h2>
         <?php
             $start_of_week_date = date_create($start_of_week);

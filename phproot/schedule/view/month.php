@@ -88,15 +88,15 @@ $holidays = getJapaneseHolidays($year);
     </style>
 </head>
 <body>
-<div class="container mt-5">
-    <h2>月間スケジュール 
-        <?php
-        $formatted_month = str_pad($month, 2, '0', STR_PAD_LEFT);
-        echo $year."年".$formatted_month."月";
-        ?>
-    </h2>
-    <div class="d-flex justify-content-between mb-3">
+<div class="container mt-3 mb-3">
+    <div class="d-flex justify-content-between align-items-center mb-3">
         <a href="?year=<?= $year ?>&month=<?= $month - 1 ?>" class="btn btn-outline-secondary">&lt; 先月</a>
+        <h2>月間スケジュール 
+            <?php
+            $formatted_month = str_pad($month, 2, '0', STR_PAD_LEFT);
+            echo $year."年".$formatted_month."月";
+            ?>
+        </h2>
         <a href="?year=<?= $year ?>&month=<?= $month + 1 ?>" class="btn btn-outline-secondary">翌月 &gt;</a>
     </div>
     <table class="table table-bordered calendar">
