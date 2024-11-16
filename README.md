@@ -80,5 +80,5 @@ phproot/
 ## 画面推移図
 ※とても見づらい
 
-![ScreenTransitionDiagram_v2](https://github.com/user-attachments/assets/a87280d4-4b83-423f-ba5b-8ae7dca72b11)
+![Image from Gyazo](https://i.gyazo.com/631d0e3126115265802e813a8f41334e.png)
 
