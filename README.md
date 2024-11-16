@@ -75,3 +75,10 @@ phproot/
 | `end`    | `datetime`       | YES  | スケジュールの終了日時   |
 | `place`  | `varchar(256)`   | YES  | スケジュールの場所       |
 | `content`| `text`           | YES  | スケジュールの内容       |
+
+
+## 画面推移図
+※とても見づらい
+
+![ScreenTransitionDiagram_v2](https://github.com/user-attachments/assets/a87280d4-4b83-423f-ba5b-8ae7dca72b11)
+
