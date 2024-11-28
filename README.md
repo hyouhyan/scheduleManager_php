@@ -1,5 +1,5 @@
 # スケジュール管理アプリ
-2024年度 後期 Webプログラミング及び演習 の第6回授業で作成  
+[2024年度 後期 Webプログラミング及び演習](https://github.com/hyouhyan/edu_2024-WebProgramming) の第6回授業で作成  
 PHPとMySQLを使用したスケジュール管理アプリ
 
 ## 仕様
